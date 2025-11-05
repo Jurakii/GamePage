@@ -1,60 +1,26 @@
-const username = "jurakii";
-const repo = "GamePage";
+document.addEventListener("DOMContentLoaded", async () => {
+  const grid = document.getElementById("games-grid");
 
-const grid = document.getElementById("game-grid");
-
-async function loadGames() {
   try {
-    const apiURL = `https://api.github.com/repos/${username}/${repo}/contents/games?ref=main`;
+    const response = await fetch("games.json");
+    if (!response.ok) throw new Error("Failed to load games.json");
 
-    const res = await fetch(apiURL);
-    if (!res.ok) throw new Error("Could not load game list.");
-    const folders = await res.json();
+    const games = await response.json();
 
-    for (const item of folders) {
-      if (item.type !== "dir") continue;
-
-      const folderName = item.name;
-
-      // Load game info.json
-      let info = { title: folderName, description: "No description available." };
-      try {
-        const infoRes = await fetch(`games/${folderName}/info.json`);
-        if (infoRes.ok) info = await infoRes.json();
-      } catch (e) {
-        console.warn(`Missing or bad info.json in ${folderName}`);
-      }
-
-      // Try to load thumbnail
-      let thumbPath = `games/${folderName}/thumbnail.png`;
-      try {
-        const thumbRes = await fetch(thumbPath);
-        if (!thumbRes.ok) thumbPath = "default-thumbnail.png";
-      } catch (e) {
-        thumbPath = "default-thumbnail.png";
-      }
-
-      // Build game card
+    games.forEach(game => {
       const card = document.createElement("div");
-      card.className = "card";
+      card.className = "game-card";
       card.innerHTML = `
-        <img src="${thumbPath}" alt="${info.title}">
-        <h2>${info.title}</h2>
-        <p>${info.description}</p>
+        <img src="${game.thumbnail}" alt="${game.title}">
+        <h2>${game.title}</h2>
+        <p>${game.description}</p>
       `;
-
-      card.onclick = () => {
-        window.open(`games/${folderName}/index.html`, "_blank");
-      };
-
+      card.onclick = () => window.location.href = `${game.folder}/index.html`;
       grid.appendChild(card);
-    }
+    });
+
   } catch (err) {
-    console.error("Error loading games:", err);
-    grid.innerHTML = `<p>⚠️ Failed to load game list. Check console for details.</p>`;
+    grid.innerHTML = `<p style="color:red;">Error loading games: ${err.message}</p>`;
+    console.error(err);
   }
-}
-
-loadGames();
-
-
+});
