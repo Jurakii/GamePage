@@ -4,7 +4,7 @@ const repo = "GamePage";
 const grid = document.getElementById("game-grid");
 
 async function loadGames() {
-  const apiURL = `https://api.github.com/repos/${username}/${repo}/contents/games`;
+  const apiURL = `https://api.github.com/repos/${username}/${repo}/contents/games?ref=main`;
   const res = await fetch(apiURL);
   const folders = await res.json();
 
@@ -33,4 +33,5 @@ async function loadGames() {
 }
 
 loadGames();
+
 
