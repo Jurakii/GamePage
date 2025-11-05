@@ -1,5 +1,5 @@
-const username = "YOUR_GITHUB_USERNAME";
-const repo = "YOUR_REPO_NAME";
+const username = "jurakii";
+const repo = "GamePage";
 
 const grid = document.getElementById("game-grid");
 
@@ -33,3 +33,4 @@ async function loadGames() {
 }
 
 loadGames();
+
