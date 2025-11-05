@@ -5,7 +5,7 @@ const grid = document.getElementById("game-grid");
 
 async function loadGames() {
   try {
-    const apiURL = `https://api.github.com/repos/_ts/games?ref=main`;
+    const apiURL = `https://api.github.com/repos/${username}/${repo}/contents/games?ref=main`;
 
     const res = await fetch(apiURL);
     if (!res.ok) throw new Error("Could not load game list.");
@@ -56,4 +56,5 @@ async function loadGames() {
 }
 
 loadGames();
+
 
