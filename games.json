@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Test Game",
+    "folder": "games/test-game",
+    "thumbnail": "games/test-game/thumbnail.png",
+    "description": "A simple demo game to test the setup."
+  },
+  {
+    "title": "Second Game",
+    "folder": "games/second-game",
+    "thumbnail": "games/second-game/thumbnail.png",
+    "description": "Another test entry for the grid."
+  }
+]
