@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: Arial, sans-serif;
   background: #111;
   color: #fff;
   text-align: center;
@@ -7,40 +7,38 @@ body {
   padding: 20px;
 }
 
-.grid {
+#games-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
   margin-top: 30px;
 }
 
-.card {
+.game-card {
   background: #222;
-  border-radius: 12px;
-  padding: 10px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
   transition: transform 0.2s;
+  cursor: pointer;
 }
 
-.card:hover {
+.game-card:hover {
   transform: scale(1.05);
 }
 
-.card img {
+.game-card img {
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
-  border-radius: 8px;
-  background: #000;
-  display: block;
 }
 
-
-.card h2 {
+.game-card h2 {
   margin: 10px 0 5px;
 }
 
-.card p {
-  color: #ccc;
+.game-card p {
   font-size: 0.9em;
+  color: #ccc;
+  padding: 0 10px 15px;
 }
-
