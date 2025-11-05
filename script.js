@@ -16,10 +16,17 @@ async function loadGames() {
     if (!infoRes.ok) continue;
     const info = await infoRes.json();
 
+    // ✅ Check if thumbnail exists
+    let thumbPath = `games/${folderName}/thumbnail.png`;
+    const thumbRes = await fetch(thumbPath);
+    if (!thumbRes.ok) {
+      thumbPath = "default-thumbnail.png";
+    }
+
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
-      <img src="games/${folderName}/thumbnail.png" alt="${info.title}">
+      <img src="${thumbPath}" alt="${info.title}">
       <h2>${info.title}</h2>
       <p>${info.description}</p>
     `;
@@ -33,5 +40,3 @@ async function loadGames() {
 }
 
 loadGames();
-
-
